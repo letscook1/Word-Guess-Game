@@ -1,6 +1,15 @@
 body {
   font-family: "Mukta", sans-serif;
-  background: url("../images/cristian-palmer-716726-unsplash\ \(1\).jpg");
-  background-size: auto;
-  background-repeat: no-repeat;
+  background-color: #008080;
+  color: #000000;
+}
+
+.container {
+  background-color: #7fffd4;
+  background-image: url("../images/seaBackground.png");
+  background-size: cover;
+  width: 100%;
+}
+
+.start-button {
 }
