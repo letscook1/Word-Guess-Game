@@ -33,3 +33,17 @@ body {
   box-shadow: 0 0.333em;
   top: 0.167em;
 }
+
+.start-button:active {
+  box-shadow: 0 0;
+  top: 0.5em;
+}
+
+.letter-section {
+  background-color: #3cb371;
+}
+
+.letters {
+  letter-spacing: 0.5em;
+  font-size: 1.25em;
+}
