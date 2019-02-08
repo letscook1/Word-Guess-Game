@@ -6,7 +6,7 @@ var domGuessesLeft = document.getElementById(gusses - left);
 var domWins = document.getElementById(wins);
 var domLosses = document.getElementById(losses);
 //create variables for game (wordBank, wins, losses, picked word, guesses left, game running, picked word placeholder, guessed letter bank, incorrect letter bank)
-var wordBank = [
+var seaLifeWords = [
   "Octopus",
   "Coral Reef",
   "Manatee",
@@ -31,10 +31,53 @@ var wordBank = [
   "Electric Eel",
   "Aqua Man"
 ];
+var wins = 0;
+var losses = 0;
+var gussesLeft = 0;
+var gameRunning = false;
+var pickedWord = "";
+var pickedWordPlaceHolderArr = [];
+var guessedLetters = [];
+var wrongLetters = [];
 
 //newGame function to reset all stats, pick new word and create placeholders
 
+function newGame() {
+  gameRunning = true;
+  guessesLeft = 8;
+  guessedLetters = [];
+  wrongLetters = [];
+  pickedWordPlaceHolderArr = [];
+
+  pickedWord = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
+
+  for (var i = 0; i < pickedWord.length; i++) {
+    if (pickedWord[i] === " ") {
+      pickedWordPlaceHolderArr.push(" ");
+    } else {
+      pickedWordPlaceHolderArr.push("_");
+    }
+  }
+
+  domGuessesLeft.textContent = guessesLeft;
+  domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
+  domGuesses.textContet = wrongLetters;
+}
+
 // letter guess function, takes in the letter you pressed and sees if it's in the selected word
+
+function letterGuess(letter) {
+  console.log(letter);
+
+  if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
+  } else {
+    if (gameRunning === false) {
+      alert("This game isn't running, click on Start New Game!");
+    } else {
+      alert("This letter was already guessed!");
+    }
+  }
+}
 
 // checkIncorrect(letter)
 
@@ -43,5 +86,7 @@ var wordBank = [
 //checkWin
 
 //add event listener for new game button
+
+domStartButton.addEventListener("click", newGame);
 
 //add onkeyupevent to trigger letterGuess

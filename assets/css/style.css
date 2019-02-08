@@ -4,6 +4,17 @@ body {
   color: #000000;
 }
 
+.header {
+  background-color: #00688b;
+  color: #ffffff;
+  font-size: 3.33em;
+  position: static;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  padding: 0.25em 0;
+}
+
 .container {
   background-color: #7fffd4;
   background-image: url("../images/seaBackground.png");
