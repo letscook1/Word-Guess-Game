@@ -70,6 +70,13 @@ function letterGuess(letter) {
   console.log(letter);
 
   if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
+    guessedLetters.push(letter);
+    for (var i = 0; i < pickedWord.length; i++) {
+      if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
+        pickedWordPlaceHolderArr[i] === pickedWord[i];
+      }
+    }
+    domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
   } else {
     if (gameRunning === false) {
       alert("This game isn't running, click on Start New Game!");
@@ -90,3 +97,9 @@ function letterGuess(letter) {
 domStartButton.addEventListener("click", newGame);
 
 //add onkeyupevent to trigger letterGuess
+
+document.onkeyup = function(event) {
+  if (event.keyCode >= 65 && event.keyCode <= 90) {
+    letterGuess(event.key);
+  }
+};
