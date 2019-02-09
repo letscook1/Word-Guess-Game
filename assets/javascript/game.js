@@ -80,7 +80,7 @@ function letterGuess(letter) {
         pickedWordPlaceHolderArr[i] = pickedWord[i];
       }
     }
-    domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
+    domLetterSpots.textContent = pickedWordPlaceHolderArr.join(" ");
 
     checkIncorrect(letter);
   } else {
