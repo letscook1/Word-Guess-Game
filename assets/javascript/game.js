@@ -89,8 +89,27 @@ function letterGuess(letter) {
 // checkIncorrect(letter)
 
 //checkLose
+function checkLoss() {
+  if (guessesLeft <= 0) {
+    losses++;
+    gameRunning = false;
+    domLosses.textContent = losses;
+  }
+  checkWin();
+}
 
 //checkWin
+
+function checkWin() {
+  if (
+    pickedWord.toLowerCase() ===
+    pickedWordPlaceholderArray.join("").toLowerCase()
+  ) {
+    wins++;
+    gameRunning = false;
+    domWins.textContent = wins;
+  }
+}
 
 //add event listener for new game button
 
@@ -101,5 +120,7 @@ domStartButton.addEventListener("click", newGame);
 document.onkeyup = function(event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
     letterGuess(event.key);
+  } else {
+    alert("Press letters a-z!");
   }
 };
