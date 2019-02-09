@@ -1,11 +1,13 @@
-//grab reference to my dom elements
-var domStartButton = document.getElementById(start_button);
-var domLetterSpots = document.getElementById(letter_spots);
-var domGuesses = document.getElementById(guesses);
-var domGuessesLeft = document.getElementById(guesses_left);
-var domWins = document.getElementById(wins);
-var domLosses = document.getElementById(losses);
-//create variables for game (wordBank, wins, losses, picked word, guesses left, game running, picked word placeholder, guessed letter bank, incorrect letter bank)
+//DOM element variables
+
+var startButtonDOM = document.getElementById(start_button);
+var blankLettersDOM = document.getElementById(letter_sports);
+var wrongLettersArrayDOM = document.getElementById(wrong_letter_bank);
+var remainingGuessesDOM = document.getElementById(remaining_guess_bank);
+var winsDOM = document.getElementById(win_bank);
+var lossesDOM = document.getElementById(loss_bank);
+
+//create an array of words
 var seaLifeWords = [
   "Octopus",
   "Coral Reef",
@@ -31,108 +33,90 @@ var seaLifeWords = [
   "Electric Eel",
   "Aqua Man"
 ];
-var wins = 0;
-var losses = 0;
-var gussesLeft = 0;
-var gameRunning = false;
-var pickedWord = "";
-var pickedWordPlaceHolderArr = [];
-var guessedLetters = [];
-var wrongLetters = [];
 
-//newGame function to reset all stats, pick new word and create placeholders
+//pick a random word from the words array
+var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
 
-function newGame() {
-  gameRunning = true;
-  guessesLeft = 8;
-  guessedLetters = [];
-  wrongLetters = [];
-  pickedWordPlaceHolderArr = [];
-
-  pickedWord = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
-  console.log(pickedWord);
-
-  for (var i = 0; i < pickedWord.length; i++) {
-    if (pickedWord[i] === " ") {
-      pickedWordPlaceHolderArr.push(" ");
-    } else {
-      pickedWordPlaceHolderArr.push("_");
-    }
-  }
-
-  console.log(pickedWordPlaceHolderArr);
-
-  domGuessesLeft.textContent = guessesLeft;
-  domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
-  domGuesses.textContet = wrongLetters;
+//sets up the answerArray to show how many letters there are using _'s
+var answerArray = [];
+for (var i = 0; i < word.length; i++) {
+  answerArray[i] = "_";
 }
 
-// letter guess function, takes in the letter you pressed and sees if it's in the selected word
+//do...
+//some way to push that to the dom element.
 
-function letterGuess(letter) {
-  console.log(letter);
+//create a variable to hold the number of remainingLetters to be guessed
+var blankLetters = word.length;
 
-  if (guessedLetters.includes(letter) === false) {
-    guessedLetters.push(letter);
+//do..
+//not really sure where the heck this would be lol.
 
-    for (var i = 0; i < pickedWord.length; i++) {
-      if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
-        pickedWordPlaceHolderArr[i] = pickedWord[i];
+//  ****************** THE MAIN GAME LOOP +++++++++++++++
+
+//while there are letters left to be guessed
+while (blankLetters > 0) {
+  //show the player their progress
+  alert(answerArray.join(" "));
+
+  //do..
+  //domElement.textContent = answerArray.join(" ");
+  //or push????
+
+  //get a guess from the player
+  var guess = prompt(" Guess a letter, or click Cancle to stop playing.");
+
+  //do...
+  //just put that in the HTML/CSS place
+  //then domElement.textConent = guess.join(" ");
+
+  //if the guess is blank
+  if (guess == null) {
+    //exit the game loop
+    break;
+    //if the guess is more than one letter or no letters
+  } else if (guess.length !== 1) {
+    //alert them to guess a single letter only;
+    alert("Please enter a single letter.");
+    //valid guess
+  } else {
+    //update the game state with the guess
+    for (var j = 0; j < word.length; j++) {
+      //if the letter they guessed is in the word at that point or index
+      if (word[j] === guess) {
+        //update the answer array with the letter they guessed at that point or index
+        answerArray[j] = guess;
+        //substract one from remaining letters
+        remainingLetters--;
       }
     }
-    domLetterSpots.textContent = pickedWordPlaceHolderArr.join(" ");
-
-    checkIncorrect(letter);
-  } else {
-    alert("Letter already guessed, pick, another letter");
   }
+  // ************ END OF THE GAME LOOP ***********
 }
+//let player know the word
+alert(answerArray.join(" "));
 
-// checkIncorrect(letter)
+//do..
+//domElement.textContent.
 
-function checkIncorrect(letter) {
-  if (pickedWordPlaceHolderArr.includes(letter) === false) {
-    guessesLeft--;
-    guesses.push(letter);
-    domGuesses.textContent = guesses.join(" ");
-    domGuessesLeft.textContent = guessesLeft;
-  }
-  checkLoss();
-}
+//do...
+//start with only 8 possible guesses for player
+//switch picture for each guess loss
 
-//checkLose
-function checkLoss() {
-  if (guessesLeft <= 0) {
-    losses++;
-    gameRunning = false;
-    domLosses.textContent = losses;
-  }
-  checkWin();
-}
+//contrate the player
+//only do it if remaining guesses is >0
+//probably have if remaining guesses = some number then have a certain picture play
+alert("Good Job! Good Effort! the answer was " + word);
+//do...
+//switching screen to whole scuba diver and then start game again with shark
+//have a clapping sound
+//if...
+//remaining guesses = 0
+//go to screen with only shark and "you loose"
+//have some sort of "awwww" sound lol
 
-//checkWin
+//do...
+//have a function to add to wins
 
-function checkWin() {
-  if (
-    pickedWord.toLowerCase() ===
-    pickedWordPlaceholderArray.join("").toLowerCase()
-  ) {
-    wins++;
-    gameRunning = false;
-    domWins.textContent = wins;
-  }
-}
-
-//add event listener for new game butto
-
-//add onkeyupevent to trigger letterGuess
-
-document.onkeyup = function(event) {
-  if (event.keyCode >= 65 && event.keyCode <= 90) {
-    letterGuess(event.key);
-  } else {
-    alert("Press letters a-z!");
-  }
-};
-
-domStartButton.addEventListener("click", newGame);
+//do...
+//have a function to add to losses
