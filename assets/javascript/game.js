@@ -72,32 +72,32 @@ function newGame() {
 function letterGuess(letter) {
   console.log(letter);
 
- if (guessedLetters.includes(letter) === false) {
-     guessedLetters.push(letter);
-     
-    for (var i = 0; i < pickedWord.length, i++) {
-        if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
-            pickedWordPlaceHolderArr[i] = pickedWord[i];
-        }
+  if (guessedLetters.includes(letter) === false) {
+    guessedLetters.push(letter);
+
+    for (var i = 0; i < pickedWord.length; i++) {
+      if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
+        pickedWordPlaceHolderArr[i] = pickedWord[i];
+      }
     }
-    domLetterSpots.textContent = pickedWordPlaceHolderArr.join("")
+    domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
 
     checkIncorrect(letter);
- } else {
-     alert("Letter already guessed, pick, another letter");
- }
+  } else {
+    alert("Letter already guessed, pick, another letter");
+  }
 }
 
 // checkIncorrect(letter)
 
-function checkIncorrect(letter){
-    if (pickedWordPlaceHolderArr.includes(letter) === false) {
-        guessesLeft--;
-        guesses.push(letter);
-        domGuesses.textContent = guesses.join(" ");
-        domGuessesLeft.textContent = guessesLeft;
-    }
-    checkLoss();
+function checkIncorrect(letter) {
+  if (pickedWordPlaceHolderArr.includes(letter) === false) {
+    guessesLeft--;
+    guesses.push(letter);
+    domGuesses.textContent = guesses.join(" ");
+    domGuessesLeft.textContent = guessesLeft;
+  }
+  checkLoss();
 }
 
 //checkLose
@@ -123,9 +123,7 @@ function checkWin() {
   }
 }
 
-//add event listener for new game button
-
-domStartButton.addEventListener("click", newGame);
+//add event listener for new game butto
 
 //add onkeyupevent to trigger letterGuess
 
@@ -136,3 +134,5 @@ document.onkeyup = function(event) {
     alert("Press letters a-z!");
   }
 };
+
+domStartButton.addEventListener("click", newGame);

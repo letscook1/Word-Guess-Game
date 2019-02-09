@@ -23,7 +23,7 @@ body {
   height: fit-content;
 }
 
-.start-button {
+#start_button {
   outline: none;
   border: none;
   cursor: pointer;
@@ -41,21 +41,21 @@ body {
   box-shadow: 0 0.5em;
 }
 
-.start-button:hover {
+#start_button:hover {
   box-shadow: 0 0.333em;
   top: 0.167em;
 }
 
-.start-button:active {
+#start_button:active {
   box-shadow: 0 0;
   top: 0.5em;
 }
 
-.letter-section {
+.letter_section {
   background-color: #3cb371;
 }
 
-.letter-spots {
+#letter_spots {
   letter-spacing: 0.5em;
   font-size: 1.25em;
 }
