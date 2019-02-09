@@ -1,8 +1,8 @@
 //grab reference to my dom elements
-var domStartButton = document.getElementsByClassName(start - button);
-var domLetterSpots = docucument.getElementsByClassName(letter - Spots);
+var domStartButton = document.getElementById(start_button);
+var domLetterSpots = document.getElementById(letter_spots);
 var domGuesses = document.getElementById(guesses);
-var domGuessesLeft = document.getElementById(gusses - left);
+var domGuessesLeft = document.getElementById(guesses_left);
 var domWins = document.getElementById(wins);
 var domLosses = document.getElementById(losses);
 //create variables for game (wordBank, wins, losses, picked word, guesses left, game running, picked word placeholder, guessed letter bank, incorrect letter bank)
@@ -50,6 +50,7 @@ function newGame() {
   pickedWordPlaceHolderArr = [];
 
   pickedWord = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
+  console.log(pickedWord);
 
   for (var i = 0; i < pickedWord.length; i++) {
     if (pickedWord[i] === " ") {
@@ -58,6 +59,8 @@ function newGame() {
       pickedWordPlaceHolderArr.push("_");
     }
   }
+
+  console.log(pickedWordPlaceHolderArr);
 
   domGuessesLeft.textContent = guessesLeft;
   domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
@@ -69,24 +72,33 @@ function newGame() {
 function letterGuess(letter) {
   console.log(letter);
 
-  if (gameRunning === true && guessedLetterBank.indexOf(letter) === -1) {
-    guessedLetters.push(letter);
-    for (var i = 0; i < pickedWord.length; i++) {
-      if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
-        pickedWordPlaceHolderArr[i] === pickedWord[i];
-      }
+ if (guessedLetters.includes(letter) === false) {
+     guessedLetters.push(letter);
+     
+    for (var i = 0; i < pickedWord.length, i++) {
+        if (pickedWord[i].toLowerCase() === letter.toLowerCase()) {
+            pickedWordPlaceHolderArr[i] = pickedWord[i];
+        }
     }
-    domLetterSpots.textContent = pickedWordPlaceHolderArr.join("");
-  } else {
-    if (gameRunning === false) {
-      alert("This game isn't running, click on Start New Game!");
-    } else {
-      alert("This letter was already guessed!");
-    }
-  }
+    domLetterSpots.textContent = pickedWordPlaceHolderArr.join("")
+
+    checkIncorrect(letter);
+ } else {
+     alert("Letter already guessed, pick, another letter");
+ }
 }
 
 // checkIncorrect(letter)
+
+function checkIncorrect(letter){
+    if (pickedWordPlaceHolderArr.includes(letter) === false) {
+        guessesLeft--;
+        guesses.push(letter);
+        domGuesses.textContent = guesses.join(" ");
+        domGuessesLeft.textContent = guessesLeft;
+    }
+    checkLoss();
+}
 
 //checkLose
 function checkLoss() {
