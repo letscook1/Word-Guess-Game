@@ -15,42 +15,6 @@ body {
   padding: 0.25em 0;
 }
 
-.container {
-  background-color: #7fffd4;
-  background-image: url("../images/seaBackground.png");
-  background-size: cover;
-  width: 100%;
-  height: fit-content;
-}
-
-#start_button {
-  outline: none;
-  border: none;
-  cursor: pointer;
-  display: block;
-  position: relative;
-  background-color: #00ffff;
-  font-size: 1.833em;
-  font-weight: bold;
-  color: #000000;
-  text-transform: uppercase;
-  padding: 1.5em;
-  border-radius: 1em;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 0.5em;
-}
-
-#start_button:hover {
-  box-shadow: 0 0.333em;
-  top: 0.167em;
-}
-
-#start_button:active {
-  box-shadow: 0 0;
-  top: 0.5em;
-}
-
 .letter_section {
   background-color: #3cb371;
 }
