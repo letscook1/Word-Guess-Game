@@ -24,9 +24,6 @@ function changeImg() {
   if (i < images.length - 1) {
     //ad 1 to index
     i++;
-  } else {
-    //reset back to 0
-    i = 0;
   }
   //run function every x seconds
   setTimeout("changeImg()", time);
@@ -34,3 +31,78 @@ function changeImg() {
 
 //run function when page loads
 window.onload = changeImg;
+
+//DOM element variables
+
+var letterSpotsDOM = document.getElementById(letter_spots);
+var wrongLettersArrayDOM = document.getElementById(wrong_letter_bank);
+var remainingGuessesDOM = document.getElementById(remaining_guess_bank);
+var winsDOM = document.getElementById(win_bank);
+var lossesDOM = document.getElementById(loss_bank);
+
+//create an array of words
+var seaLifeWords = [
+  "Octopus",
+  "Coral Reef",
+  "Manatee",
+  "Starfish",
+  "Killer Whale",
+  "Beluga Whale",
+  "Humpback Whale",
+  "Galapagos Tortoise",
+  "Seahorse",
+  "Mermaid",
+  "California Seal",
+  "Clown Fish",
+  "JellyFish",
+  "Stingray",
+  "Dolphin",
+  "Sea Otter",
+  "Sea Lion",
+  "Walrus",
+  "Penguin",
+  "Axolotl",
+  "Lobster",
+  "Electric Eel",
+  "Aqua Man"
+];
+//declare game variables
+var wins = 0;
+var losses = 0;
+var remainingGuesses = 0;
+var gameOn = false;
+var word = "";
+var answerArray = [];
+var rightLetters = [];
+var wrongLetters = [];
+var letterSpots = [];
+
+if ((i = 8)) {
+  function startGame() {
+    gameOn = true;
+    rightLetters = [];
+    wrongLetters = [];
+    pickedWordPlaceHolderArr = [];
+    //create a variable to hold the number of remainingLetters to be guessed
+    letterSpots = word.length;
+
+    //pick a random word from the words array
+    var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
+
+    //sets up the answerArray to show how many letters there are using _'s
+    var answerArray = [];
+    for (var i = 0; i < word.length; i++) {
+      if (word[i] === " ") {
+        //putting a space for the words that have spaces
+        answerArray[i] = " ";
+      } else {
+        answerArray[i] = "_";
+      }
+    }
+
+    //send underscores and spaces to the dom elemenet
+    remainingGuessesDOM.textContent = remainingGuesses;
+    letterSpotsDOM.textContent = letterSpots;
+    wrongLettersArrayDOM.textContent = wrongLetters;
+  }
+}
