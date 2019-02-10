@@ -44,7 +44,7 @@ window.onload = changeImg;
 
 //DOM element variables
 var answerArrayDOM = document.getElementById(answer_array);
-var wrongLetterArrayDOM = document.getElementById(wrong_letter_bank);
+var wrongLetterArrayDOM = document.getElementById(wrong_letter_array);
 var winsDOM = document.getElementById(win_bank);
 var lossesDOM = document.getElementById(loss_bank);
 
@@ -81,28 +81,26 @@ var word = "";
 var answerArray = [];
 var wrongLetterArray = [];
 
-if ((i = 8)) {
-  function startGame() {
-    gameOn = true;
-    rightLetters = [];
-    wrongLetters = [];
-    pickedWordPlaceHolderArr = [];
-    //create a variable to hold the number of remainingLetters to be guessed
-    letterSpots = word.length;
+function startGame() {
+  gameOn = true;
+  rightLetters = [];
+  wrongLetters = [];
+  pickedWordPlaceHolderArr = [];
+  //create a variable to hold the number of remainingLetters to be guessed
+  letterSpots = word.length;
 
-    //pick a random word from the words array
-    var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
+  //pick a random word from the words array
+  var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
 
-    //sets up the answerArray to show how many letters there are using _'s
-    var answerArray = [];
-    for (var j = 0; j < word.length; j++) {
-      answerArray[j] = "_";
-    }
-
-    //send underscores and spaces to the dom elemenet
-    answerArrayDOM.textContent = answerArray;
-    wrongLettersArrayDOM.textContent = wrongLetters;
+  //sets up the answerArray to show how many letters there are using _'s
+  var answerArray = [];
+  for (var j = 0; j < word.length; j++) {
+    answerArray[j] = "_";
   }
+
+  //send underscores and spaces to the dom elemenet
+  answerArrayDOM.textContent = answerArray.join(" ");
+  wrongLettersArrayDOM.textContent = wrongLetters;
 }
 
 function wrongLetter(letter) {
