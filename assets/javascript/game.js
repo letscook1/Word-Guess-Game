@@ -21,6 +21,8 @@ images[12] = "assets/images/slide13.jpg";
 images[13] = "assets/images/slide14.jpg";
 images[14] = "assets/images/slide15.jpg";
 images[15] = "assets/images/slide16.jpg";
+images[16] = "assets/images/slide17.jpg";
+images[17] = "assets/images/slide18.jpg";
 
 //change image
 function changeImg() {
