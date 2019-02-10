@@ -36,40 +36,37 @@ window.onload = changeImg;
 
 var letterSpotsDOM = document.getElementById(letter_spots);
 var wrongLettersArrayDOM = document.getElementById(wrong_letter_bank);
-var remainingGuessesDOM = document.getElementById(remaining_guess_bank);
 var winsDOM = document.getElementById(win_bank);
 var lossesDOM = document.getElementById(loss_bank);
 
 //create an array of words
 var seaLifeWords = [
   "Octopus",
-  "Coral Reef",
+  "Coral",
   "Manatee",
   "Starfish",
-  "Killer Whale",
-  "Beluga Whale",
-  "Humpback Whale",
-  "Galapagos Tortoise",
+  "Orca",
+  "Whale",
+  "Tortoise",
   "Seahorse",
   "Mermaid",
-  "California Seal",
-  "Clown Fish",
+  "Seal",
   "JellyFish",
   "Stingray",
   "Dolphin",
-  "Sea Otter",
-  "Sea Lion",
   "Walrus",
+  "Porpoise",
   "Penguin",
   "Axolotl",
   "Lobster",
-  "Electric Eel",
-  "Aqua Man"
+  "Aquaman",
+  "Shrimp",
+  "Seadragon",
+  "Squid"
 ];
 //declare game variables
 var wins = 0;
 var losses = 0;
-var remainingGuesses = 0;
 var gameOn = false;
 var word = "";
 var answerArray = [];
