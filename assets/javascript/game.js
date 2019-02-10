@@ -34,35 +34,35 @@ window.onload = changeImg;
 
 //DOM element variables
 
-var letterSpotsDOM = document.getElementById(letter_spots);
+var answerArrayDOM = document.getElementById(answer_array);
 var wrongLettersArrayDOM = document.getElementById(wrong_letter_bank);
 var winsDOM = document.getElementById(win_bank);
 var lossesDOM = document.getElementById(loss_bank);
 
 //create an array of words
 var seaLifeWords = [
-  "Octopus",
-  "Coral",
-  "Manatee",
-  "Starfish",
-  "Orca",
-  "Whale",
-  "Tortoise",
-  "Seahorse",
-  "Mermaid",
-  "Seal",
-  "JellyFish",
-  "Stingray",
-  "Dolphin",
-  "Walrus",
-  "Porpoise",
-  "Penguin",
-  "Axolotl",
-  "Lobster",
-  "Aquaman",
-  "Shrimp",
-  "Seadragon",
-  "Squid"
+  "OCTOPUS",
+  "CCRAL",
+  "MANATEE",
+  "STARFISH",
+  "ORCA",
+  "WHALE",
+  "TORTOISE",
+  "SEAHORSE",
+  "MERMAID",
+  "SEAL",
+  "JELLYFISH",
+  "STINGRAY",
+  "DOLPHIN",
+  "WALRUS",
+  "PORPOISE",
+  "PENGUIN",
+  "AXOLOTL",
+  "LOBSTER",
+  "AQUAMAN",
+  "SHRIM",
+  "SEADRAGON",
+  "SQUID"
 ];
 //declare game variables
 var wins = 0;
@@ -88,18 +88,12 @@ if ((i = 8)) {
 
     //sets up the answerArray to show how many letters there are using _'s
     var answerArray = [];
-    for (var i = 0; i < word.length; i++) {
-      if (word[i] === " ") {
-        //putting a space for the words that have spaces
-        answerArray[i] = " ";
-      } else {
-        answerArray[i] = "_";
-      }
+    for (var j = 0; j < word.length; j++) {
+      answerArray[j] = "_";
     }
 
     //send underscores and spaces to the dom elemenet
-    remainingGuessesDOM.textContent = remainingGuesses;
-    letterSpotsDOM.textContent = letterSpots;
+    answerArrayDOM.textContent = answerArray;
     wrongLettersArrayDOM.textContent = wrongLetters;
   }
 }
