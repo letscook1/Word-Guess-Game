@@ -35,7 +35,7 @@ window.onload = changeImg;
 //DOM element variables
 
 var answerArrayDOM = document.getElementById(answer_array);
-var wrongLettersArrayDOM = document.getElementById(wrong_letter_bank);
+var wrongLetterArrayDOM = document.getElementById(wrong_letter_bank);
 var winsDOM = document.getElementById(win_bank);
 var lossesDOM = document.getElementById(loss_bank);
 
@@ -70,9 +70,7 @@ var losses = 0;
 var gameOn = false;
 var word = "";
 var answerArray = [];
-var rightLetters = [];
-var wrongLetters = [];
-var letterSpots = [];
+var wrongLetterArray = [];
 
 if ((i = 8)) {
   function startGame() {
@@ -96,4 +94,12 @@ if ((i = 8)) {
     answerArrayDOM.textContent = answerArray;
     wrongLettersArrayDOM.textContent = wrongLetters;
   }
+}
+
+function wrongLetter(letter) {
+  if (answerArray.includes(letter) === false) {
+    wrongLetterArray.push(letter);
+    wrongLetterArrayDOM.textContent = wrongLetter.join(" ");
+  }
+  checkLoss();
 }
