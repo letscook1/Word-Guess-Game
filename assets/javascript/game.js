@@ -2,7 +2,7 @@
 
 var i = 0; //start point
 var images = []; //images array
-var time = 3000; //time between switch
+var time = 4000; //time between switch
 
 //image list
 images[0] = "assets/images/slide1.jpg";
@@ -14,6 +14,13 @@ images[5] = "assets/images/slide6.jpg";
 images[6] = "assets/images/slide7.jpg";
 images[7] = "assets/images/slide8.jpg";
 images[8] = "assets/images/slide9.jpg";
+images[9] = "assets/images/slide10.jpg";
+images[10] = "assets/images/slide11.jpg";
+images[11] = "assets/images/slide12.jpg";
+images[12] = "assets/images/slide13.jpg";
+images[13] = "assets/images/slide14.jpg";
+images[14] = "assets/images/slide15.jpg";
+images[15] = "assets/images/slide16.jpg";
 
 //change image
 function changeImg() {
@@ -60,7 +67,7 @@ var seaLifeWords = [
   "AXOLOTL",
   "LOBSTER",
   "AQUAMAN",
-  "SHRIM",
+  "SHRIMP",
   "SEADRAGON",
   "SQUID"
 ];
