@@ -1,36 +1,37 @@
 //Beginning Slide Show
 
 var i = 0; //start point
-var images = []; //images array
 var time = 4000; //time between switch
 
-//image list
-images[0] = "assets/images/slide1.jpg";
-images[1] = "assets/images/slide2.jpg";
-images[2] = "assets/images/slide3.jpg";
-images[3] = "assets/images/slide4.jpg";
-images[4] = "assets/images/slide5.jpg";
-images[5] = "assets/images/slide6.jpg";
-images[6] = "assets/images/slide7.jpg";
-images[7] = "assets/images/slide8.jpg";
-images[8] = "assets/images/slide9.jpg";
-images[9] = "assets/images/slide10.jpg";
-images[10] = "assets/images/slide11.jpg";
-images[11] = "assets/images/slide12.jpg";
-images[12] = "assets/images/slide13.jpg";
-images[13] = "assets/images/slide14.jpg";
-images[14] = "assets/images/slide15.jpg";
-images[15] = "assets/images/slide16.jpg";
-images[16] = "assets/images/slide17.jpg";
-images[17] = "assets/images/slide18.jpg";
+//images array
+var imageArray = [
+  "assets/images/slide1.jpg",
+  "assets/images/slide2.jpg",
+  "assets/images/slide3.jpg",
+  "assets/images/slide4.jpg",
+  "assets/images/slide5.jpg",
+  "assets/images/slide6.jpg",
+  "assets/images/slide7.jpg",
+  "assets/images/slide8.jpg",
+  "assets/images/slide9.jpg",
+  "assets/images/slide10.jpg",
+  "assets/images/slide11.jpg",
+  "assets/images/slide12.jpg",
+  "assets/images/slide13.jpg",
+  "assets/images/slide14.jpg",
+  "assets/images/slide15.jpg",
+  "assets/images/slide16.jpg",
+  "assets/images/slide17.jpg",
+  "assets/images/slide18.jpg"
+];
 
 //change image
 function changeImg() {
-  document.slide.src = images[i];
+  document.slide.src = imageArray[i];
 
   //check if index is under max
 
-  if (i < images.length - 1) {
+  if (i < imageArray.length - 1) {
     //ad 1 to index
     i++;
   }
@@ -42,7 +43,6 @@ function changeImg() {
 window.onload = changeImg;
 
 //DOM element variables
-
 var answerArrayDOM = document.getElementById(answer_array);
 var wrongLetterArrayDOM = document.getElementById(wrong_letter_bank);
 var winsDOM = document.getElementById(win_bank);
