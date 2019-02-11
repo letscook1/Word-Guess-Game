@@ -1,18 +1,9 @@
 //Beginning Slide Show
 
 var i = 0; //start point
-var time = 4000; //time between switch
 
 //intro images array
 var imageArray = [
-  "assets/images/slide1.jpg",
-  "assets/images/slide2.jpg",
-  "assets/images/slide3.jpg",
-  "assets/images/slide4.jpg",
-  "assets/images/slide5.jpg",
-  "assets/images/slide6.jpg",
-  "assets/images/slide7.jpg",
-  "assets/images/slide8.jpg",
   "assets/images/slide9.jpg",
   "assets/images/slide10.jpg",
   "assets/images/slide11.jpg",
@@ -25,41 +16,54 @@ var imageArray = [
   "assets/images/slide18.jpg"
 ];
 
+//had to take out these intro images because they messed my game up too much
+//"assets/images/slide1.jpg",
+//"assets/images/slide2.jpg",
+//"assets/images/slide3.jpg",
+//"assets/images/slide4.jpg",
+//"assets/images/slide5.jpg",
+//"assets/images/slide6.jpg",
+//"assets/images/slide7.jpg",
+//"assets/images/slide8.jpg",
+
 //change image
 function changeImg() {
   document.slide.src = imageArray[i];
 
   //check if index is under max
 
-  if (i < 7 - 1) {
-    //ad 1 to index
-    i++;
-  } else if ((gameOn = true && wrongGuessNumber == 0)) {
+  //took out the intro from array since it seemed to mess with everything. **sigh**
+  //if (i < 7 - 1) {
+  //ad 1 to index
+  //i++;
+  //} else
+
+  //my images are not changining even with this :-(
+
+  if (wrongGuessNumber === 8) {
+    i = 0;
+  } else if (wrongGuessNumber === 7) {
+    i = 1;
+  } else if (wrongGuessNumber === 6) {
+    i = 2;
+  } else if (wrongGuessNumber === 5) {
+    i = 3;
+  } else if (wrongGuessNumber === 4) {
+    i = 4;
+  } else if (wrongGuessNumber === 3) {
+    i = 5;
+  } else if (wrongGuessNumber === 2) {
+    i = 6;
+  } else if (wrongGuessNumber === 1) {
     i = 7;
-  } else if ((gameOn = true && wrongGuessNumber == 1)) {
+  } else if (wrongGuessNumber <= 0) {
     i = 8;
-  } else if ((gameOn = true && wrongGuessNumber == 2)) {
-    i = 9;
-  } else if ((gameOn = true && wrongGuessNumber == 3)) {
-    i = 10;
-  } else if ((gameOn = true && wrongGuessNumber == 4)) {
-    i = 11;
-  } else if ((gameOn = true && wrongGuessNumber == 5)) {
-    i = 12;
-  } else if ((gameOn = true && wrongGuessNumber == 6)) {
-    i = 13;
-  } else if ((gameOn = true && wrongGuessNumber == 7)) {
-    i = 14;
-  } else if ((gameOn = false && wrongGuessNumber >= 8)) {
-    i = 15;
-  } else if ((gameOn = false && wrongGuessNumber >= 9)) {
-    i = 16;
   } else if (wins++) {
-    i = 17;
+    i = 9;
   }
 
-  //run function every x seconds
-  setTimeout("changeImg()", time);
+  // taking out intro to run function every x seconds seems broken
+  //setTimeout("changeImg()", time);
 }
 
 //run function when page loads
@@ -71,6 +75,17 @@ var wrongLetterArrayDOM = document.getElementById("wrong_letter_array");
 var winsDOM = document.getElementById("win_bank");
 var lossesDOM = document.getElementById("loss_bank");
 var startButtonDOM = document.getElementById("start_button");
+var wrongGuessNumberDOM = document.getElementById("remaining_guesses");
+
+//declare game variables
+var wins = 0;
+var losses = 0;
+var gameOn = false;
+var word = "";
+var answerArray = [];
+var wrongLetterArray = [];
+var guessedLetterArray = [];
+var wrongGuessNumber = 9;
 
 //create an array of words
 var seaLifeWords = [
@@ -97,32 +112,25 @@ var seaLifeWords = [
   "SEADRAGON",
   "SQUID"
 ];
-//declare game variables
-var wins = 0;
-var losses = 0;
-var gameOn = false;
-var word = "";
-var answerArray = [];
-var wrongLetterArray = [];
-var wrongGuessNumber = 0;
 
 //variables restaring for new game and getting a word
 function startGame() {
   gameOn = true;
   wrongLetterArray = [];
   answerArray = [];
-
+  guessedLetterArray = [];
+  wrongGuessNumber = 9;
   //pick a random word from the words array
-  var word =
-    seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)].toUpperCase;
+  var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
 
   //sets up the answerArray to show how many letters there are using _'s
-  var answerArray = [];
+
   for (var j = 0; j < word.length; j++) {
     //push underscores for missing word
-    answerArray[j].push("_");
+    answerArray.push("_");
   }
 
+  //pushing elements to the DOM
   answerArrayDOM.textContent = answerArray.join(" ");
   wrongLetterArrayDOM.textContent = wrongLetterArray;
 }
@@ -132,12 +140,12 @@ function startGame() {
 //checking the guessed letter inside of the word
 function guess(letter) {
   //this part seems really weird lol. it's like a triple negative in english
-  if (wrongLetterArray.includes(letter) === false) {
-    wrongLetterArray.push(letter);
+  if (guessedLetterArray.includes(letter) === false) {
+    guessedLetterArray.push(letter);
 
-    for (var k = 0; k < word.length; k++) {
-      if (word[k].toUppperCase() === letter.toUpperCase()) {
-        answerArray[k] = word[k];
+    for (var j = 0; j < word.length; j++) {
+      if (word[j].toUppperCase() === letter.toUpperCase()) {
+        answerArray[j] = word[j];
       }
     }
     answerArrayDOM.textContent = answerArray.join(" ");
@@ -152,13 +160,13 @@ function checkIncorrect(letter) {
   if (answerArray.includes(letter) === false) {
     wrongLetterArray.push(letter);
     wrongLetterArrayDOM.textContent = wrongLetterArray.join(" ");
-    wrongGuessNumber++;
+    wrongGuessNumber--;
   }
   checkLoss();
 }
 //checkLose
 function checkLoss() {
-  if (wrongGuessNumber >= 8) {
+  if (wrongGuessNumber <= 0) {
     losses++;
     gameRunning = false;
     lossesDOM.textContent = losses;
@@ -177,15 +185,18 @@ function checkWin() {
 }
 
 //add onkeyupevent to trigger letterGuess
+// Wait for key press
 
 document.onkeyup = function(event) {
-  if (event.keyCode >= 65 && event.keyCode <= 90) {
+  // check to see if letter pressed is a-z
+  if (event.keyCode >= 65 && event.keyCode <= 90 && gameOn === true) {
+    // run game logic
     guess(event.key);
   } else {
-    alert("Press letters from A-Z!");
+    alert("Press something that's a-z or start a new game!");
   }
 };
-
 //addeventlistener to begin game
 
 startButtonDOM.addEventListener("click", startGame);
+console.log(startGame);
