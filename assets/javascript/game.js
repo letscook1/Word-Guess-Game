@@ -70,7 +70,7 @@ var answerArrayDOM = document.getElementById(answer_array);
 var wrongLetterArrayDOM = document.getElementById(wrong_letter_array);
 var winsDOM = document.getElementById(win_bank);
 var lossesDOM = document.getElementById(loss_bank);
-var startButtonDom = document.getElementById(start_button);
+var startButtonDOM = document.getElementById(start_button);
 
 //create an array of words
 var seaLifeWords = [
@@ -190,4 +190,4 @@ document.onkeyup = function(event) {
 
 //addeventlistener to begin game
 
-startButtonDom.addEventListener("click", startGame());
+startButtonDOM.addEventListener("click", startGame);
