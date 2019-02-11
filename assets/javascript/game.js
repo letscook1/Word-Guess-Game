@@ -4,7 +4,7 @@ var i = 0; //start point
 var time = 4000; //time between switch
 
 //intro images array
-var introImageArray = [
+var imageArray = [
   "assets/images/slide1.jpg",
   "assets/images/slide2.jpg",
   "assets/images/slide3.jpg",
@@ -12,11 +12,7 @@ var introImageArray = [
   "assets/images/slide5.jpg",
   "assets/images/slide6.jpg",
   "assets/images/slide7.jpg",
-  "assets/images/slide8.jpg"
-];
-
-//gaming images array
-var gamingImageArray = [
+  "assets/images/slide8.jpg",
   "assets/images/slide9.jpg",
   "assets/images/slide10.jpg",
   "assets/images/slide11.jpg",
@@ -35,10 +31,31 @@ function changeImg() {
 
   //check if index is under max
 
-  if (i < introImageArray.length - 1) {
+  if (i < 9 - 1) {
     //ad 1 to index
     i++;
-  } else if (gameOn = true) &&
+  } else if ((gameOn = true && wrongGuessNumber == 1)) {
+    i = 9;
+  } else if ((gameOn = true && wrongGuessNumber == 2)) {
+    i = 10;
+  } else if ((gameOn = true && wrongGuessNumber == 3)) {
+    i = 11;
+  } else if ((gameOn = true && wrongGuessNumber == 4)) {
+    i = 12;
+  } else if ((gameOn = true && wrongGuessNumber == 5)) {
+    i = 13;
+  } else if ((gameOn = true && wrongGuessNumber == 6)) {
+    i = 14;
+  } else if ((gameOn = true && wrongGuessNumber == 7)) {
+    i = 15;
+  } else if ((gameOn = true && wrongGuessNumber == 8)) {
+    i = 16;
+  } else if ((gameOn = false && wrongGuessNumber >= 9)) {
+    i = 17;
+  } else if (wins++) {
+    i = 18;
+  }
+
   //run function every x seconds
   setTimeout("changeImg()", time);
 }
@@ -107,28 +124,25 @@ function startGame() {
   answerArrayDOM.textContent = answerArray.join(" ");
   wrongLettersArrayDOM.textContent = wrongLetters;
 
-  while (letterSpots > 0){
+  while (letterSpots > 0) {
     //show the player their progress
     alert(answerArray.join(" "));
-  
+
     //get a guess from the player
     var guess = prompt(" Guess a letter, or click Cancle to stop playing.");
-  
 
-      //update the game state with the guess
-      for  (var j= 0; j < word.length; j++){
-        //if the letter they guessed is in the word at that point or index
-        if (word[j] === guess){
-          //update the answer array with the letter they guessed at that point or index
-          answerArray[j] = guess;
-          //substract one from remaining letters
-          remainingLetters--;
-        }
+    //update the game state with the guess
+    for (var j = 0; j < word.length; j++) {
+      //if the letter they guessed is in the word at that point or index
+      if (word[j] === guess) {
+        //update the answer array with the letter they guessed at that point or index
+        answerArray[j] = guess;
+        //substract one from remaining letters
+        remainingLetters--;
       }
     }
+  }
 }
-
-
 
 function checkLetter(letter) {
   if (answerArray.includes(letter) === false) {
@@ -137,7 +151,6 @@ function checkLetter(letter) {
     wrongGuessNumber++;
   }
   checkLoss();
- 
 }
 //checkLose
 function checkLoss() {
@@ -171,7 +184,7 @@ document.onkeyup = function(event) {
   } else {
     alert("Press letters a-z!");
   }
-}
+};
 
 //addeventlistener to begin game
 
