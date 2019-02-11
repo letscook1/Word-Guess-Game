@@ -38,23 +38,23 @@ function changeImg() {
   //i++;
   //} else
 
-  //my images are not changining even with this :-(
+  //my images are not changining even with this :-( very very sad
 
-  if (wrongGuessNumber === 8) {
+  if (wrongGuessNumber == 8) {
     i = 0;
-  } else if (wrongGuessNumber === 7) {
+  } else if (wrongGuessNumber == 7) {
     i = 1;
-  } else if (wrongGuessNumber === 6) {
+  } else if (wrongGuessNumber == 6) {
     i = 2;
-  } else if (wrongGuessNumber === 5) {
+  } else if (wrongGuessNumber == 5) {
     i = 3;
-  } else if (wrongGuessNumber === 4) {
+  } else if (wrongGuessNumber == 4) {
     i = 4;
-  } else if (wrongGuessNumber === 3) {
+  } else if (wrongGuessNumber == 3) {
     i = 5;
-  } else if (wrongGuessNumber === 2) {
+  } else if (wrongGuessNumber == 2) {
     i = 6;
-  } else if (wrongGuessNumber === 1) {
+  } else if (wrongGuessNumber == 1) {
     i = 7;
   } else if (wrongGuessNumber <= 0) {
     i = 8;
@@ -121,7 +121,7 @@ function startGame() {
   guessedLetterArray = [];
   wrongGuessNumber = 9;
   //pick a random word from the words array
-  var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
+  word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
 
   //sets up the answerArray to show how many letters there are using _'s
 
@@ -140,12 +140,13 @@ function startGame() {
 //checking the guessed letter inside of the word
 function guess(letter) {
   //this part seems really weird lol. it's like a triple negative in english
-  if (guessedLetterArray.includes(letter) === false) {
+
+  if (!guessedLetterArray.includes(letter)) {
     guessedLetterArray.push(letter);
 
     for (var j = 0; j < word.length; j++) {
-      if (word[j].toUppperCase() === letter.toUpperCase()) {
-        answerArray[j] = word[j];
+      if (word.charAt(j).toUpperCase() === letter.toUpperCase()) {
+        answerArray[j] = word.charAt(j);
       }
     }
     answerArrayDOM.textContent = answerArray.join(" ");
@@ -161,6 +162,7 @@ function checkIncorrect(letter) {
     wrongLetterArray.push(letter);
     wrongLetterArrayDOM.textContent = wrongLetterArray.join(" ");
     wrongGuessNumber--;
+    wrongGuessNumberDOM.textContent = wrongGuessNumber;
   }
   checkLoss();
 }
@@ -170,6 +172,7 @@ function checkLoss() {
     losses++;
     gameRunning = false;
     lossesDOM.textContent = losses;
+    startGame();
   }
   checkWin();
 }
@@ -189,6 +192,8 @@ function checkWin() {
 
 document.onkeyup = function(event) {
   // check to see if letter pressed is a-z
+  console.log("IN KEY UP");
+  console.log("keycode", event.keyCode);
   if (event.keyCode >= 65 && event.keyCode <= 90 && gameOn === true) {
     // run game logic
     guess(event.key);
