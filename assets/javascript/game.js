@@ -167,7 +167,7 @@ function checkLoss() {
 //checkWin
 
 function checkWin() {
-  if (word.toUpperCase() === word.join("").toUpperCase()) {
+  if (word.toUpperCase() === answerArray.join("").toUpperCase()) {
     wins++;
     gameRunning = false;
     winsDOM.textContent = wins;
