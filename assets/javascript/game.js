@@ -131,7 +131,7 @@ function startGame() {
     alert(answerArray.join(" "));
 
     //get a guess from the player
-    var guess = prompt(" Guess a letter, or click Cancle to stop playing.");
+    var guess = prompt(" Guess a letter from A-Z!");
 
     //update the game state with the guess
     for (var j = 0; j < word.length; j++) {
@@ -170,7 +170,7 @@ function checkLoss() {
 function checkWin() {
   if (
     pickedWord.toUpperCase() ===
-    pickedWordPlaceholderArray.join("").toLowerCase()
+    pickedWordPlaceholderArray.join("").toUpperCase()
   ) {
     wins++;
     gameRunning = false;
@@ -182,12 +182,12 @@ function checkWin() {
 
 document.onkeyup = function(event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
-    letterGuess(event.key);
+    guess(event.key.toUpperCase);
   } else {
-    alert("Press letters a-z!");
+    alert("Press letters from A-Z!");
   }
 };
 
 //addeventlistener to begin game
 
-startButtonDom.addEventListener("click", startGame);
+startButtonDom.addEventListener("click", startGame());
