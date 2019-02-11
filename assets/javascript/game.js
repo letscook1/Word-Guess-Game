@@ -118,22 +118,18 @@ function startGame() {
 
   //sets up the answerArray to show how many letters there are using _'s
   var answerArray = [];
-  for (var j = 0; k < word.length; j < k j++) {
+  for (var j = 0; j < word.length; j++) {
     //push underscores for missing word
     answerArray[j].push("_");
   }
 
-  updateGameStats()
-}
-
-//updating game stats
-function updateGameStats(){
-answerArrayDOM.textContent = answerArray.join(" ");
-wrongLetterArrayDOM.textContent = wrongLetterArray;
+  answerArrayDOM.textContent = answerArray.join(" ");
+  wrongLetterArrayDOM.textContent = wrongLetterArray;
 }
 
 // letter guess function, takes in the letter you pressed and sees if it's in the selected word
 
+//checking the guessed letter inside of the word
 function guess(letter) {
   //this part seems really weird lol. it's like a triple negative in english
   if (wrongLetterArray.includes(letter) === false) {
@@ -166,7 +162,6 @@ function checkLoss() {
     losses++;
     gameRunning = false;
     lossesDOM.textContent = losses;
-    answerArrayDOM.textContent = word;
   }
   checkWin();
 }
@@ -185,7 +180,7 @@ function checkWin() {
 
 document.onkeyup = function(event) {
   if (event.keyCode >= 65 && event.keyCode <= 90) {
-    guess(event.key.toUpperCase);
+    guess(event.key);
   } else {
     alert("Press letters from A-Z!");
   }
