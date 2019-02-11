@@ -38,7 +38,7 @@ function changeImg() {
   if (i < introImageArray.length - 1) {
     //ad 1 to index
     i++;
-  }
+  } else if (gameOn = true) &&
   //run function every x seconds
   setTimeout("changeImg()", time);
 }
@@ -89,8 +89,8 @@ var wrongGuessNumber = 0;
 
 function startGame() {
   gameOn = true;
-  rightLetters = [];
-  wrongLetters = [];
+  wrongLetterArray = [];
+  answerArray = [];
   //create a variable to hold the number of remainingLetters to be guessed
   letterSpots = word.length;
 
@@ -114,16 +114,7 @@ function startGame() {
     //get a guess from the player
     var guess = prompt(" Guess a letter, or click Cancle to stop playing.");
   
-    //if the guess is blank
-    if (guess == null){
-      //exit the game loop
-      break;
-      //if the guess is more than one letter or no letters
-    } else if (guess.length !== 1){
-      //alert them to guess a single letter only;
-      alert("Please enter a single letter.");
-      //valid guess
-    } else {
+
       //update the game state with the guess
       for  (var j= 0; j < word.length; j++){
         //if the letter they guessed is in the word at that point or index
