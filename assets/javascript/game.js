@@ -106,23 +106,30 @@ var answerArray = [];
 var wrongLetterArray = [];
 var wrongGuessNumber = 0;
 
+//variables restaring for new game and getting a word
 function startGame() {
   gameOn = true;
   wrongLetterArray = [];
   answerArray = [];
 
   //pick a random word from the words array
-  var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
+  var word =
+    seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)].toUpperCase;
 
   //sets up the answerArray to show how many letters there are using _'s
   var answerArray = [];
-  for (var j = 0; j < word.length; j++) {
-    answerArray[j] = "_";
+  for (var j = 0; k < word.length; j < k j++) {
+    //push underscores for missing word
+    answerArray[j].push("_");
   }
 
-  //send underscores and spaces to the dom elemenet
-  answerArrayDOM.textContent = answerArray.join(" ");
-  wrongLetterArrayDOM.textContent = wrongLetterArray;
+  updateGameStats()
+}
+
+//updating game stats
+function updateGameStats(){
+answerArrayDOM.textContent = answerArray.join(" ");
+wrongLetterArrayDOM.textContent = wrongLetterArray;
 }
 
 // letter guess function, takes in the letter you pressed and sees if it's in the selected word
