@@ -66,16 +66,16 @@ function changeImg() {
 window.onload = changeImg;
 
 //DOM element variables
-var answerArrayDOM = document.getElementById(answer_array);
-var wrongLetterArrayDOM = document.getElementById(wrong_letter_array);
-var winsDOM = document.getElementById(win_bank);
-var lossesDOM = document.getElementById(loss_bank);
-var startButtonDOM = document.getElementById(start_button);
+var answerArrayDOM = document.getElementById("answer_array");
+var wrongLetterArrayDOM = document.getElementById("wrong_letter_array");
+var winsDOM = document.getElementById("win_bank");
+var lossesDOM = document.getElementById("loss_bank");
+var startButtonDOM = document.getElementById("start_button");
 
 //create an array of words
 var seaLifeWords = [
   "OCTOPUS",
-  "CCRAL",
+  "CORAL",
   "MANATEE",
   "STARFISH",
   "ORCA",
@@ -104,14 +104,12 @@ var gameOn = false;
 var word = "";
 var answerArray = [];
 var wrongLetterArray = [];
-var wrongGuessNumber = 0;
+var wrongGuessNumber = [];
 
 function startGame() {
   gameOn = true;
   wrongLetterArray = [];
   answerArray = [];
-  //create a variable to hold the number of remainingLetters to be guessed
-  letterSpots = word.length;
 
   //pick a random word from the words array
   var word = seaLifeWords[Math.floor(Math.random() * seaLifeWords.length)];
@@ -124,32 +122,33 @@ function startGame() {
 
   //send underscores and spaces to the dom elemenet
   answerArrayDOM.textContent = answerArray.join(" ");
-  wrongLettersArrayDOM.textContent = wrongLetters;
+  wrongLetterArrayDOM.textContent = wrongLetterArray;
+}
 
-  while (letterSpots > 0) {
-    //show the player their progress
-    alert(answerArray.join(" "));
+// letter guess function, takes in the letter you pressed and sees if it's in the selected word
 
-    //get a guess from the player
-    var guess = prompt(" Guess a letter from A-Z!");
+function guess(letter) {
+  //this part seems really weird lol. it's like a triple negative in english
+  if (wrongLetterArray.includes(letter) === false) {
+    wrongLetterArray.push(letter);
 
-    //update the game state with the guess
-    for (var j = 0; j < word.length; j++) {
-      //if the letter they guessed is in the word at that point or index
-      if (word[j] === guess) {
-        //update the answer array with the letter they guessed at that point or index
-        answerArray[j] = guess;
-        //substract one from remaining letters
-        remainingLetters--;
+    for (var k = 0; k < word.length; k++) {
+      if (word[k].toUppperCase() === letter.toUpperCase()) {
+        answerArray[k] = word[k];
       }
     }
+    answerArrayDOM.textContent = answerArray.join(" ");
+
+    checkIncorrect(letter);
+  } else {
+    alert("Letter already guessed, pick, another letter");
   }
 }
 
-function checkLetter(letter) {
+function checkIncorrect(letter) {
   if (answerArray.includes(letter) === false) {
     wrongLetterArray.push(letter);
-    wrongLetterArrayDOM.textContent = wrongLetter.join(" ");
+    wrongLetterArrayDOM.textContent = wrongLetterArray.join(" ");
     wrongGuessNumber++;
   }
   checkLoss();
@@ -168,10 +167,7 @@ function checkLoss() {
 //checkWin
 
 function checkWin() {
-  if (
-    pickedWord.toUpperCase() ===
-    pickedWordPlaceholderArray.join("").toUpperCase()
-  ) {
+  if (word.toUpperCase() === word.join("").toUpperCase()) {
     wins++;
     gameRunning = false;
     winsDOM.textContent = wins;
