@@ -31,29 +31,31 @@ function changeImg() {
 
   //check if index is under max
 
-  if (i < 9 - 1) {
+  if (i < 7 - 1) {
     //ad 1 to index
     i++;
+  } else if ((gameOn = true && wrongGuessNumber == 0)) {
+    i = 7;
   } else if ((gameOn = true && wrongGuessNumber == 1)) {
-    i = 9;
+    i = 8;
   } else if ((gameOn = true && wrongGuessNumber == 2)) {
-    i = 10;
+    i = 9;
   } else if ((gameOn = true && wrongGuessNumber == 3)) {
-    i = 11;
+    i = 10;
   } else if ((gameOn = true && wrongGuessNumber == 4)) {
-    i = 12;
+    i = 11;
   } else if ((gameOn = true && wrongGuessNumber == 5)) {
-    i = 13;
+    i = 12;
   } else if ((gameOn = true && wrongGuessNumber == 6)) {
-    i = 14;
+    i = 13;
   } else if ((gameOn = true && wrongGuessNumber == 7)) {
+    i = 14;
+  } else if ((gameOn = false && wrongGuessNumber >= 8)) {
     i = 15;
-  } else if ((gameOn = true && wrongGuessNumber == 8)) {
-    i = 16;
   } else if ((gameOn = false && wrongGuessNumber >= 9)) {
-    i = 17;
+    i = 16;
   } else if (wins++) {
-    i = 18;
+    i = 17;
   }
 
   //run function every x seconds
@@ -188,4 +190,4 @@ document.onkeyup = function(event) {
 
 //addeventlistener to begin game
 
-domStartButton.addEventListener("click", startGame);
+startButtonDom.addEventListener("click", startGame);
