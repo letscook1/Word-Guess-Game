@@ -104,7 +104,7 @@ var gameOn = false;
 var word = "";
 var answerArray = [];
 var wrongLetterArray = [];
-var wrongGuessNumber = [];
+var wrongGuessNumber = 0;
 
 function startGame() {
   gameOn = true;
