@@ -3,8 +3,8 @@
 var i = 0; //start point
 var time = 4000; //time between switch
 
-//images array
-var imageArray = [
+//intro images array
+var introImageArray = [
   "assets/images/slide1.jpg",
   "assets/images/slide2.jpg",
   "assets/images/slide3.jpg",
@@ -12,7 +12,11 @@ var imageArray = [
   "assets/images/slide5.jpg",
   "assets/images/slide6.jpg",
   "assets/images/slide7.jpg",
-  "assets/images/slide8.jpg",
+  "assets/images/slide8.jpg"
+];
+
+//gaming images array
+var gamingImageArray = [
   "assets/images/slide9.jpg",
   "assets/images/slide10.jpg",
   "assets/images/slide11.jpg",
@@ -31,7 +35,7 @@ function changeImg() {
 
   //check if index is under max
 
-  if (i < imageArray.length - 1) {
+  if (i < introImageArray.length - 1) {
     //ad 1 to index
     i++;
   }
@@ -47,6 +51,7 @@ var answerArrayDOM = document.getElementById(answer_array);
 var wrongLetterArrayDOM = document.getElementById(wrong_letter_array);
 var winsDOM = document.getElementById(win_bank);
 var lossesDOM = document.getElementById(loss_bank);
+var startButtonDom = document.getElementById(start_button);
 
 //create an array of words
 var seaLifeWords = [
@@ -80,12 +85,12 @@ var gameOn = false;
 var word = "";
 var answerArray = [];
 var wrongLetterArray = [];
+var wrongGuessNumber = 0;
 
 function startGame() {
   gameOn = true;
   rightLetters = [];
   wrongLetters = [];
-  pickedWordPlaceHolderArr = [];
   //create a variable to hold the number of remainingLetters to be guessed
   letterSpots = word.length;
 
@@ -101,12 +106,82 @@ function startGame() {
   //send underscores and spaces to the dom elemenet
   answerArrayDOM.textContent = answerArray.join(" ");
   wrongLettersArrayDOM.textContent = wrongLetters;
+
+  while (letterSpots > 0){
+    //show the player their progress
+    alert(answerArray.join(" "));
+  
+    //get a guess from the player
+    var guess = prompt(" Guess a letter, or click Cancle to stop playing.");
+  
+    //if the guess is blank
+    if (guess == null){
+      //exit the game loop
+      break;
+      //if the guess is more than one letter or no letters
+    } else if (guess.length !== 1){
+      //alert them to guess a single letter only;
+      alert("Please enter a single letter.");
+      //valid guess
+    } else {
+      //update the game state with the guess
+      for  (var j= 0; j < word.length; j++){
+        //if the letter they guessed is in the word at that point or index
+        if (word[j] === guess){
+          //update the answer array with the letter they guessed at that point or index
+          answerArray[j] = guess;
+          //substract one from remaining letters
+          remainingLetters--;
+        }
+      }
+    }
 }
 
-function wrongLetter(letter) {
+
+
+function checkLetter(letter) {
   if (answerArray.includes(letter) === false) {
     wrongLetterArray.push(letter);
     wrongLetterArrayDOM.textContent = wrongLetter.join(" ");
+    wrongGuessNumber++;
   }
   checkLoss();
+ 
 }
+//checkLose
+function checkLoss() {
+  if (wrongGuessNumber >= 8) {
+    losses++;
+    gameRunning = false;
+    lossesDOM.textContent = losses;
+    answerArrayDOM.textContent = word;
+  }
+  checkWin();
+}
+
+//checkWin
+
+function checkWin() {
+  if (
+    pickedWord.toUpperCase() ===
+    pickedWordPlaceholderArray.join("").toLowerCase()
+  ) {
+    wins++;
+    gameRunning = false;
+    winsDOM.textContent = wins;
+  }
+}
+
+//add onkeyupevent to trigger letterGuess
+
+document.onkeyup = function(event) {
+  if (event.keyCode >= 65 && event.keyCode <= 90) {
+    letterGuess(event.key);
+  } else {
+    alert("Press letters a-z!");
+  }
+}
+
+//addeventlistener to begin game
+
+domStartButton.addEventListener("click", startGame);
